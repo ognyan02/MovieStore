@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MovieStore.DL.DB;
+using MovieStore.DL.Interfaces;
+using MovieStore.Models.DTO;
 
 namespace MovieStore.DL.Repositories
 {
-    internal class MovieRepository
+    public class MovieRepository : IMovieRepository
     {
+        public List<Movie> GetMovies()
+        {
+            return StaticData.Movies;
+        }
     }
 }
