@@ -25,6 +25,10 @@ namespace MovieStore.DL.DB
             {
                 Id = 3, Title = "The Dark Knight", Year = 2008
             },
+             new Movie
+            {
+                Id = 4, Title = "Arcane", Year = 2024
+            },
         };
     }
 }
