@@ -10,6 +10,11 @@ namespace MovieStore.DL.Repositories
         {
             return StaticData.Movies;
         }
+        public void AddMovie(Movie newMovie)
+        {
+            newMovie.Id = StaticData.Movies.Count > 0 ? StaticData.Movies[^1].Id + 1 : 1;
+            StaticData.Movies.Add(newMovie);
+        }
 
     }
 }

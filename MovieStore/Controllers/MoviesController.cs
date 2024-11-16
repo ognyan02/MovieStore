@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieStore.DL.Interfaces;
 using MovieStore.Models.DTO;
 using MovieStore.BL.Interfaces;
+using MovieStore.BL.Services;
 namespace MovieStore.Controllers
 {
     [ApiController]
@@ -19,6 +19,12 @@ namespace MovieStore.Controllers
         public IEnumerable<Movie> Get()
         {
             return _movieService.GetAll();
+        }
+
+        [HttpPost("Add")]
+        public void Add(Movie movie)
+        {
+            _movieService.Add(movie);
         }
     }
 }

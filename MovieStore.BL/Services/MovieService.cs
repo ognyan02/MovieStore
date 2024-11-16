@@ -18,5 +18,9 @@ namespace MovieStore.BL.Services
         {
             return _movieRepository.GetMovies();
         }
+        public void Add(Movie newMovie)
+        {
+            _movieRepository.AddMovie(newMovie);
+        }
     }
 }

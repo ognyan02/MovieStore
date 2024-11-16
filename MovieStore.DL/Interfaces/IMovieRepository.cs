@@ -11,5 +11,6 @@ namespace MovieStore.DL.Interfaces
     public interface IMovieRepository
     {
         List<Movie> GetMovies();
+        void AddMovie(Movie newMovie);
     }
 }
