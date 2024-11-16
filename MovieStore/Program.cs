@@ -1,6 +1,13 @@
+using MovieStore.BL;
+using MovieStore.DL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services
+             .RegisterRepositories()
+             .RegisterServices();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,3 +30,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

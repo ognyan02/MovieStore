@@ -11,24 +11,10 @@ namespace MovieStore.DL.DB
     {
         public static List<Movie> Movies = new List<Movie>
         {
-            new Movie
-            {
-                Id = 1,
-                Title = "The Shawshank Redemption",
-                Year = 1994
-            },
-            new Movie
-            {
-                Id = 2, Title = "The Godfather", Year = 1972
-            },
-            new Movie
-            {
-                Id = 3, Title = "The Dark Knight", Year = 2008
-            },
-             new Movie
-            {
-                Id = 4, Title = "Arcane", Year = 2024
-            },
+            new Movie { Id = 1, Title = "The Shawshank Redemption", Year = 1994 },
+            new Movie { Id = 2, Title = "The Godfather", Year = 1972 },
+            new Movie { Id = 3, Title = "The Dark Knight", Year = 2008 },
+            new Movie { Id = 4, Title = "Arcane", Year = 2024 }
         };
     }
 }

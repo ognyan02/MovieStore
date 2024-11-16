@@ -10,5 +10,6 @@ namespace MovieStore.DL.Repositories
         {
             return StaticData.Movies;
         }
+
     }
 }
