@@ -2,6 +2,7 @@
 using MovieStore.Models.DTO;
 using MovieStore.BL.Interfaces;
 using MovieStore.BL.Services;
+
 namespace MovieStore.Controllers
 {
     [ApiController]
@@ -25,6 +26,17 @@ namespace MovieStore.Controllers
         public void Add(Movie movie)
         {
             _movieService.Add(movie);
+        }
+
+        [HttpGet("GetById/{id}")]
+        public ActionResult<Movie> GetById(int id)
+        {
+            var movie = _movieService.GetById(id);
+            if (movie == null)
+            {
+                return NotFound($"Movie with ID {id} not found.");
+            }
+            return Ok(movie);
         }
     }
 }
