@@ -1,43 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MovieStore.Models.DTO;
-using MovieStore.BL.Interfaces;
-using MovieStore.BL.Services;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
+using MovieStoreC.BL.Interfaces;
+using MovieStoreC.Models.DTO;
+using MovieStoreC.Models.Requests;
 
-namespace MovieStore.Controllers
+namespace MovieStoreC.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class MoviesController : ControllerBase
     {
         private readonly IMoviesService _movieService;
+        private readonly IMapper _mapper;
 
-        public MoviesController(IMoviesService movieService)
+        public MoviesController(
+            IMoviesService movieService,
+            IMapper mapper)
         {
             _movieService = movieService;
+            _mapper = mapper;
         }
 
         [HttpGet("GetAll")]
-        public IEnumerable<Movie> Get()
+        public IEnumerable<Movie> GetAll()
         {
             return _movieService.GetAll();
         }
 
-        [HttpPost("Add")]
-        public void Add(Movie movie)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet("GetById")]
+        public IActionResult GetById(int id)
         {
-            _movieService.Add(movie);
+            if (id <= 0)
+            {
+                return BadRequest($"Wrong ID:{id}");
+            }
+
+            var result = _movieService.GetById(id);
+
+            if (result == null)
+            {
+                return NotFound($"Movie with ID:{id} not found");
+            }
+
+            return Ok(result);
         }
 
-        [HttpGet("GetById/{id}")]
-        public ActionResult<Movie> GetById(int id)
+        [HttpPost("Add")]
+        public void Add([FromBody]AddMovieRequest movie)
         {
-            var movie = _movieService.GetById(id);
-            if (movie == null)
-            {
-                return NotFound($"Movie with ID {id} not found.");
-            }
-            return Ok(movie);
+            var movieDto = _mapper.Map<Movie>(movie);
+
+            _movieService.Add(movieDto);
+        }
+
+        [HttpDelete("Delete")]
+        public void Delete(int id)
+        {
+            //return _movieService.GetById(id);
         }
     }
 }
-
